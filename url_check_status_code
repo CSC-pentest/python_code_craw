@@ -1,0 +1,28 @@
+import csv
+import requests
+
+
+datafile = "url_2.csv"  #hard-code file include url of ONT
+
+def editfile(): #func remove \n in the original file
+    with open(datafile, "rw") as f:
+        list_line = f.readlines()
+
+        for e_line in list_line:
+
+            f.write(e_line.replace("\n", ""))
+
+with open(datafile, "r") as f: #open file then request
+    list_line = f.readlines()
+
+    for e_line in list_line:
+        print(e_line)
+       # list_line_clean.append(e_line.replace("\n", ""))
+        try: # try-catch exception the error url 
+            url_request = requests.get(e_line)
+            #print("not \n:" ,e_line.replace("\n", ""))
+        #print(url_request)
+        #if url_request.status_code
+            print("status code: ",url_request.status_code)
+        except:
+            print("error: ", e_line)
